@@ -1,0 +1,78 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.edu.eafit.huffman;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+/**
+ *
+ * @author Santy
+ */
+public class Tree {
+    //Genera el arbol a partir de la lista de Nodos
+    public static Node genTree(ArrayList<Node> list){
+        if(list.size()>1){
+            list.add(new Node(
+                    (char)0,
+                    list.get(0).getHowMany()+list.get(1).getHowMany(),
+                    list.get(0),
+                    list.get(1)));
+            //Elimino los dos primeros
+            list.remove(0);
+            list.remove(0);
+            //Ordeno
+            Collections.sort(list);
+            return genTree(list);
+        }
+        return list.get(0);
+    }
+    //Pone el Codigo Huffman Correspondiente a cada nodo segun el codigo que
+    //llevava el padre
+    public static Node evaluateNode(Node nodo, String huffcode){
+        nodo.setHuffcode(huffcode);
+        if(nodo.getLeft()!=null){
+            Node left = evaluateNode(nodo.getLeft(), nodo.getHuffcode()+"0");
+            nodo.setLeft(left);
+        }
+        if(nodo.getRight()!=null){
+            Node right = evaluateNode(nodo.getRight(), nodo.getHuffcode()+"1");
+            nodo.setRight(right);
+        }
+        return nodo;
+    }
+    //Generar la lista con los nodos y su codigo Huffman correspondiente
+    public static ArrayList<Node> getTable(Node nodo){
+        ArrayList<Node> list = new ArrayList<>();
+        getNodeHuffcode(list, nodo);
+        //Eliminar sin caracter
+        Iterator<Node> iterator = list.iterator();
+        while(iterator.hasNext()){
+            if(iterator.next().getLetter()==(char)0){
+                iterator.remove();
+            }
+        }
+        return list;
+    }
+    //Procedimiente que añade los nodos validos (con caracteres) a la lista
+    public static void getNodeHuffcode(ArrayList<Node> list, Node nodo){
+        if(nodo.getLeft()!=null){
+            list.add(nodo.getLeft());
+            getNodeHuffcode(list, nodo.getLeft());
+        }
+        if(nodo.getRight()!=null){
+            list.add(nodo.getRight());
+            getNodeHuffcode(list, nodo.getRight());
+        }
+    }
+    public static String printList(ArrayList<Node> list){
+        String ret = "";
+        for (int i = 0; i < list.size(); i++) {
+            ret+=" "+(char)list.get(i).getLetter()+": "+Integer.toString(
+                    (int)list.get(i).getHowMany())+": "+list.get(i)
+                    .getHuffcode()+"\n";
+        }
+        return ret;
+    }
+}

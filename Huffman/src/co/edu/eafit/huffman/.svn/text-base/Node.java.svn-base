@@ -1,0 +1,78 @@
+package co.edu.eafit.huffman;
+/**
+ *
+ * @author Santiago Montoya Angarita
+ * @author Sergio
+ */
+public class Node implements Comparable<Node>{
+    //Atributos
+    private Node left = null;
+    private Node right = null;
+    private char letter = 0;
+    private int how_many = 0;
+    private String huffcode = "";
+    
+    //Constructores
+    public Node(char letter, int how_many, Node left, Node right){
+        this.letter = letter;
+        this.how_many = how_many;
+        this.left = left;
+        this.right = right;
+    }
+    public Node(char letter, int how_many){
+        this.letter = letter;
+        this.how_many = how_many;
+    }
+    public Node(Node left, Node right){
+    	this.left = left;
+    	this.right = right;
+    }
+    //Métodos
+    	//Getters
+    	public Node getLeft(){
+            return this.left;
+    	}
+	public Node getRight(){
+            return this.right;
+	}
+        public char getLetter(){
+            return this.letter;
+        }
+        public int getHowMany(){
+            return this.how_many;
+        }
+        public String getHuffcode(){
+            return this.huffcode;
+        }
+    	//Setters
+    	public void setLeft(Node node){
+            this.left = node;
+    	}
+	public void setRight(Node node){
+            this.right = node;
+	}
+        public void setLetter(char letter){
+            this.letter = letter;
+        }
+        public void setHowMany(int how_many){
+            this.how_many = how_many;
+        }
+        public void setHuffcode(String huffcode){
+            this.huffcode = huffcode;
+        }
+
+    @Override
+    public int compareTo(Node o) {
+        if(this.how_many == o.getHowMany()){
+            return 0;
+        }
+        else if(this.how_many >= o.getHowMany()){
+            return 1; //Ascendente
+            //return -1; //Desendente
+        }
+        else{
+            return -1; //Ascendente
+            //return 1; //Desendente
+        }
+    }
+}

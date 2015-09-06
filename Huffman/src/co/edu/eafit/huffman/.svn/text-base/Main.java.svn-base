@@ -1,0 +1,79 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.edu.eafit.huffman;
+import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.event.*;
+/**
+ *
+ * @author Santy
+ * @version 
+ */
+public class Main extends JFrame implements ActionListener{
+    private JLabel lbl,lblequi;
+    private JButton btn;
+    private JTextArea txt_texto,txt_cifrar,txt_tabla;
+    private JScrollPane l,txt,equiv;
+    /**
+     * @param args the command line arguments
+     */
+    public Main(){
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        setLayout(null);
+        setTitle("Algoritmo de Huffman");
+        setLocation(400,150);
+        setResizable(false);
+        setIconImage(new ImageIcon(getClass().getResource("Orange-64.png"))
+                .getImage());
+        txt_texto = new JTextArea();
+        txt_cifrar = new JTextArea();
+        txt_tabla = new JTextArea();
+        l = new JScrollPane(txt_texto);
+        l.setBounds(10, 20, 400, 290);
+        lblequi = new JLabel("Equivalencias");
+        lblequi.setBounds(490, 20, 100, 30);
+        lbl = new JLabel("Código Huffman");
+        lbl.setBounds(170, 300, 150, 60);
+        txt = new JScrollPane(txt_cifrar);
+        txt.setBounds(10,350 ,270, 60);
+        txt_cifrar.setEditable(false);
+        btn = new JButton("Cifrar");
+        btn.setBounds( 305, 355, 100, 40);
+        btn.setActionCommand("Cifrar");
+        btn.addActionListener(this);
+        equiv = new JScrollPane(txt_tabla);
+        equiv.setBounds(430, 70, 210, 340);
+        txt_tabla.setEditable(false);
+        add(btn);
+        add(lbl);
+        add(txt);
+        add(l);
+        add(lblequi);
+        add(equiv);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e ){
+        String comando = e.getActionCommand();
+        if(txt_texto.getText().length()>1){
+            if("Cifrar".equals(comando)){
+                String text = txt_texto.getText();
+                ArrayList<Node> list = Huffman.doIt(text);
+                txt_cifrar.setText(Huffman.encode(list,text));
+                txt_tabla.setText(Tree.printList(list));
+            }
+        }else if(txt_texto.getText().length()==1){
+            txt_cifrar.setText("0");
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Ingrese un Texto para cifrar");
+        }
+    }
+    
+    public static void main(String[] args) {
+        Main windows = new Main();
+        windows.setSize(655,460);
+    }   
+}

@@ -1,0 +1,77 @@
+8
+
+dir
+2
+https://riouxsvn.com/svn/huffman/Huffman
+https://riouxsvn.com/svn/huffman
+
+
+
+2014-05-29T01:20:53.227067Z
+2
+zantys
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+1e6c9fec-a62c-4e59-a52b-3aee6266c8ff
+
+build
+dir
+
+dist
+dir
+
+nbproject
+dir
+
+Thumbs.db
+file
+
+
+
+
+2014-05-29T02:16:19.868839Z
+f4831ccfdb20277907477d4340fbf471
+2014-05-29T01:20:15.260897Z
+1
+zantys
+has-props
+
+src
+dir
+
+manifest.mf
+file
+
+
+
+
+2014-05-29T02:16:19.873844Z
+1a85ea4420d859b3aab3af09fc398382
+2014-05-29T01:20:15.260897Z
+1
+zantys
+
+build.xml
+file
+
+
+
+
+2014-05-29T02:16:19.860834Z
+ee24202b23231695e58d4bbf37be54ab
+2014-05-29T01:20:15.260897Z
+1
+zantys
+
